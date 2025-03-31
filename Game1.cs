@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System;
 
 namespace Monogame_2___Lists___Loops
 {
@@ -8,6 +10,12 @@ namespace Monogame_2___Lists___Loops
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        Random generator;
+        Rectangle window;
+        Texture2D spaceBackgroundTexture;
+        List<Texture2D> textures;
+        List<Rectangle> planetRects;
 
         public Game1()
         {
@@ -18,7 +26,15 @@ namespace Monogame_2___Lists___Loops
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            window = new Rectangle(0, 0, _graphics.PreferredBackBufferWidth,  _graphics.PreferredBackBufferHeight);
+            generator = new Random();
+            textures = new List<Texture2D>();
+            planetRects = new List<Rectangle>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                planetRects.Add(new Rectangle(generator.Next(window.Width - 25), generator.Next(window.Height - 25), 25, 25)); // Challenge: Make rectangle have random sizes...
+            }
 
             base.Initialize();
         }
